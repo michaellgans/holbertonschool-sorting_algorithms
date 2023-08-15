@@ -27,10 +27,13 @@ void insertion_sort_list(listint_t **list)
 
 			current->next = current->prev;
 			current->prev = current->prev->prev;
-			current->next->prev = current;
 
-			if (!current->prev)
+			if (current->prev)
+				current->prev->next = current;
+			else
 				*list = current;
+
+			current->next->prev = current;
 
 			print_list(*list);
 		}
